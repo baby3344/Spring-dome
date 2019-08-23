@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+	   http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context-3.2.xsd">
+    <!--扫描包中注解标注的类-->
+    <context:component-scan base-package="cn.qwx.dao,cn.qwx.service"></context:component-scan>
+
+    <!--通过bean元素声明需要Spring创建的实例。该实例的类型通过class属性指定，并通过id属性为该实例属性制定一个名称，以便于访问-->
+    <bean id="helloSpring" class="cn.qwx.entity.HelloSpring">
+       <!--property元素用来实例的属性赋值，
+       此处实际是调用serWho()方法实现赋值操作-->
+        <property name="who">
+            <!--此处将字符创“Spring赋值给who属性”-->
+            <value>Spring</value>
+        </property>
+
+        <!--&lt;!&ndash; 注入List类型 &ndash;&gt;
+        <property name="list">
+            <list>
+                &lt;!&ndash; 定义List中的元素 &ndash;&gt;
+                <value>足球</value>
+                <value>篮球</value>
+            </list>
+        </property>
+
+        &lt;!&ndash; 注入数组类型 &ndash;&gt;
+        <property name="array">
+            <list>
+                &lt;!&ndash; 定义数组中的元素 &ndash;&gt;
+                <value>足球</value>
+                <value>篮球</value>
+            </list>
+        </property>
+        &lt;!&ndash; 注入Set类型 &ndash;&gt;
+        <property name="set">
+            <set>
+                &lt;!&ndash; 定义Set或数组中的元素 &ndash;&gt;
+                <value>足球</value>
+                <value>篮球</value>
+            </set>
+        </property>
+        &lt;!&ndash; 注入Map类型 &ndash;&gt;
+        <property name="map">
+            <map>
+                &lt;!&ndash; 定义Map中的键值对 &ndash;&gt;
+                <entry>
+                    <key>
+                        <value>football</value>
+                    </key>
+                    <value>足球</value>
+                </entry>
+                <entry>
+                    <key>
+                        <value>basketball</value>
+                    </key>
+                    <value>篮球</value>
+                </entry>
+            </map>
+        </property>
+        &lt;!&ndash; 注入Properties类型 &ndash;&gt;
+        <property name="props">
+            <props>
+                &lt;!&ndash; 定义Properties中的键值对 &ndash;&gt;
+                <prop key="football">足球</prop>
+                <prop key="basketball">篮球</prop>
+            </props>
+        </property>
+        &lt;!&ndash; 注入空字符串值 &ndash;&gt;
+        <property name="emptyValue">
+            <value></value>
+        </property>
+        &lt;!&ndash; 注入null值 &ndash;&gt;
+        <property name="nullValue">
+            <null/>
+        </property>-->
+    </bean>
+
+    <bean id="user" class="cn.qwx.entity.User">
+        <property name="id" value="1"></property>
+        <property name="userName">
+            <!--<value><![CDATA[张&三]]></value>-->
+            <value>张&amp;三</value>
+        </property>
+        <property name="userPassword" value="111111"></property>
+    </bean>
+
+    <!--（示例3）-->
+    <bean id="user1" class="cn.qwx.entity.User">
+        <property name="userName">
+            <value>张三</value>
+        </property>
+        <property name="userPassword">
+            <value>123456</value>
+        </property>
+    </bean>
+
+    <!--(示例4(ch06))-->
+    <bean id="user2" class="cn.qwx.entity.User" p:userName="张三" p:userPassword="123456"/>
+
+    <!--引用其他Bean组件-->
+    <!--定义userDao对象，并指定id为userDao-->
+    <bean id="userDao" class="cn.qwx.dao.impl.UserDaoImpl"></bean>
+
+    <!--定义userService对象，并指定id为定义userService-->
+    <bean id="userService" class="cn.qwx.service.impl.UserServiceImpl">
+         <!--为userService的属性赋值，需要注意的是，这里调用setDao()方法-->
+        <property name="dao">
+            <!--引用id为userDao的对象为定义userService的到赋值-->
+            <ref bean="userDao"/>
+        </property>
+    </bean>
+
+    <!--定义userService对象，并指定id为定义userService-->
+    <bean id="userService1" class="cn.qwx.service.impl.UserServiceImpl">
+        <!--为userService的属性赋值，需要注意的是，这里调用setDao()方法-->
+        <property name="dao">
+            <!--引用id为userDao的对象为定义userService的到赋值-->
+            <ref local="userDao"/>
+        </property>
+    </bean>
+
+    <!--定义userService对象，并指定id为定义userService-->
+    <bean id="定义userService" class="cn.qwx.service.impl.UserServiceImpl">
+        <!--为userService的属性赋值，需要注意的是，这里调用setDao()方法-->
+        <property name="dao">
+            <!--引用id为userDao的对象为定义userService的到赋值-->
+            <bean class="cn.qwx.dao.impl.UserDaoImpl"/>
+        </property>
+    </bean>
+
+        <!--定义墨盒-->
+       <bean id="colorInk" class="cn.qwx.dao.impl.ColorInk"/>
+        <bean id="greyInk" class="cn.qwx.dao.impl.GreyInk"/>
+        <!--定义纸张-->
+        <bean id="a4Paper" class="cn.qwx.dao.impl.TextPaper">
+            <property name="charPerLine" value="10"/>
+            <property name="lineParPage" value="8"/>
+        </bean>
+
+        <bean id="b5Paper" class="cn.qwx.dao.impl.TextPaper">
+            <property name="charPerLine" value="6"/>
+            <property name="lineParPage" value="5"/>
+        </bean>
+      <!-- 组装打印机-->
+        <bean id="printer" class="cn.qwx.entity.Printer">
+            <property name="ink" ref="colorInk"/>
+            <property name="paper" ref="b5Paper"/>
+        </bean>
+</beans>
