@@ -148,9 +148,15 @@
             <property name="charPerLine" value="6"/>
             <property name="lineParPage" value="5"/>
         </bean>
-      <!-- 组装打印机-->
+      <!-- 组装打印机使用b4纸张打印-->
         <bean id="printer" class="cn.qwx.entity.Printer">
             <property name="ink" ref="colorInk"/>
             <property name="paper" ref="b5Paper"/>
+        </bean>
+
+         <!--使用a4纸张打印-->
+        <bean id="printer1" class="cn.qwx.entity.Printer">
+        <property name="ink" ref="greyInk"/>
+        <property name="paper" ref="a4Paper"/>
         </bean>
 </beans>
