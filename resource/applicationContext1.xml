@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+	   http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context-3.2.xsd">
+
+    <!--定义bean，该Bean的id是zhangGa（张嘎），class指定该bean示例的实现类-->
+    <bean id="zhangGa" class="cn.qwx.entity.Greeting">
+       <property name="person" value="张嘎"/>
+        <property name="words" value="三天不打鬼子，手都痒痒"/>
+    </bean>
+
+    <bean id="rod" class="cn.qwx.entity.Greeting">
+        <property name="person" value="Rod"/>
+        <property name="words" value="世界上有10种人，认识二进制和不认识二进制的。"/>
+    </bean>
+</beans>

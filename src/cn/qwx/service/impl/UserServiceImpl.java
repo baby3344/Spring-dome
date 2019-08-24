@@ -33,6 +33,10 @@ public class UserServiceImpl implements UserService {
         this.dao=userDao;
     }
 
+    public void setDao(UserDao dao) {
+        this.dao = dao;
+    }
+
     private UserDao userDao = new UserDaoImpl();
     //通过工厂获取所依赖的用户DAO对象
     private UserDao dao1=UserDaoFactory.getInstance();
@@ -40,7 +44,6 @@ public class UserServiceImpl implements UserService {
     public void addNewUser(User user){
         dao1.save(user);
     }
-
 
     /**
      * 无参构造方法
@@ -61,8 +64,17 @@ public class UserServiceImpl implements UserService {
         System.out.println(user.getId());
         System.out.println(user.getUserName());
         System.out.println(user.getUserPassword());
+        System.out.println("特殊字符1：" + user.getSpecialCharacter1());
+        System.out.println("特殊字符2：" + user.getSpecialCharacter2());
+        //System.out.println("内部Bean：" + user.getInnerBean().getUserName());
+        System.out.println("List属性：" + user.getList());
+        System.out.println("数组属性[0]：" + user.getArray()[0]);
+        System.out.println("Set属性：" + user.getSet());
+        System.out.println("Map属性：" + user.getMap());
+        System.out.println("Properties属性：" + user.getProps());
+        System.out.println("注入空字符串：[" + user.getEmptyValue() + "]");
+        System.out.println("注入null值：" + user.getNullValue());
         return userDao.save(user);
     }
-
 
 }

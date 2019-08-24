@@ -15,14 +15,10 @@ public class UserTest {
 
     @Test
     public void testUser(){
-
         ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
-
         User user = (User) context.getBean("user");
-
         UserService service = (UserService) context.getBean("userService");
         int result = service.save(user);
-
         logger.info("结果是："+result);
     }
 
@@ -36,4 +32,5 @@ public class UserTest {
         int result = userService.save(user);
 
         logger.info("结果是："+result);
-    }}
+    }
+}

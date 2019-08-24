@@ -19,35 +19,46 @@
             <value>Spring</value>
         </property>
 
-        <!--&lt;!&ndash; 注入List类型 &ndash;&gt;
+
+    </bean>
+
+    <bean id="user" class="cn.qwx.entity.User">
+        <property name="id" value="1"></property>
+        <property name="userName">
+            <!--<value><![CDATA[张&三]]></value>-->
+            <value>张&amp;三</value>
+        </property>
+        <property name="userPassword" value="111111"></property>
+
+        <!--  注入List类型-->
         <property name="list">
             <list>
-                &lt;!&ndash; 定义List中的元素 &ndash;&gt;
+                <!-- 定义List中的元素-->
                 <value>足球</value>
                 <value>篮球</value>
             </list>
         </property>
 
-        &lt;!&ndash; 注入数组类型 &ndash;&gt;
+        <!-- 注入数组类型 -->
         <property name="array">
             <list>
-                &lt;!&ndash; 定义数组中的元素 &ndash;&gt;
+                <!--定义数组中的元素 -->
                 <value>足球</value>
                 <value>篮球</value>
             </list>
         </property>
-        &lt;!&ndash; 注入Set类型 &ndash;&gt;
+        <!-- 注入Set类型-->
         <property name="set">
             <set>
-                &lt;!&ndash; 定义Set或数组中的元素 &ndash;&gt;
+                <!--定义Set或数组中的元素 -->
                 <value>足球</value>
                 <value>篮球</value>
             </set>
         </property>
-        &lt;!&ndash; 注入Map类型 &ndash;&gt;
+        <!--注入Map类型 -->
         <property name="map">
             <map>
-                &lt;!&ndash; 定义Map中的键值对 &ndash;&gt;
+                <!--定义Map中的键值对 -->
                 <entry>
                     <key>
                         <value>football</value>
@@ -62,31 +73,22 @@
                 </entry>
             </map>
         </property>
-        &lt;!&ndash; 注入Properties类型 &ndash;&gt;
+        <!--注入Properties类型-->
         <property name="props">
             <props>
-                &lt;!&ndash; 定义Properties中的键值对 &ndash;&gt;
+                <!--定义Properties中的键值对-->
                 <prop key="football">足球</prop>
                 <prop key="basketball">篮球</prop>
             </props>
         </property>
-        &lt;!&ndash; 注入空字符串值 &ndash;&gt;
+        <!-- 注入空字符串值 -->
         <property name="emptyValue">
             <value></value>
         </property>
-        &lt;!&ndash; 注入null值 &ndash;&gt;
+        <!-- 注入null值-->
         <property name="nullValue">
             <null/>
-        </property>-->
-    </bean>
-
-    <bean id="user" class="cn.qwx.entity.User">
-        <property name="id" value="1"></property>
-        <property name="userName">
-            <!--<value><![CDATA[张&三]]></value>-->
-            <value>张&amp;三</value>
         </property>
-        <property name="userPassword" value="111111"></property>
     </bean>
 
     <!--（示例3）-->
