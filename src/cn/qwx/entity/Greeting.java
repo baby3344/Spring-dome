@@ -25,4 +25,12 @@ public class Greeting {
     public void sayGreeting(){
         System.out.println(person+"说：“"+words+"”");
     }
+
+    //构造注入
+    public Greeting(){}
+
+    public  Greeting(String person,String words){
+        this.person=person;
+        this.words=words;
+    }
 }
