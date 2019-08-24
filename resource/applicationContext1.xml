@@ -9,13 +9,13 @@
        http://www.springframework.org/schema/context/spring-context-3.2.xsd">
 
     <!--定义bean，该Bean的id是zhangGa（张嘎），class指定该bean示例的实现类-->
-    <bean id="zhangGa" class="cn.qwx.entity.Greeting" >
+    <bean id="zhangGa" class="cn.qwx.entity.Greeting" p:person="张嘎" p:words="三天不打鬼子，手都痒痒！">
        <!-- <property name="person" value="张嘎"/>
         <property name="words" value="三天不打鬼子，手都痒痒"/>-->
 
         <!--使用构造注入完成属性赋值-->
-        <constructor-arg value="张嘎"/>
-        <constructor-arg value="三天不打鬼子，手都痒痒！"/>
+        <!--<constructor-arg value="张嘎"/>-->
+        <!--<constructor-arg value="三天不打鬼子，手都痒痒！"/>-->
 
     </bean>
 
