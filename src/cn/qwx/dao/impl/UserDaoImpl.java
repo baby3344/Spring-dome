@@ -9,7 +9,14 @@ import org.springframework.stereotype.Repository;
 //@Repository（"userDao")
 public class UserDaoImpl implements UserDao {
     public int save(User user) {
+
         System.out.println("保存成功！");
         return 1;
     }
+
+    public int delete(int id){
+        System.out.println("删除成功！");
+        return 1;
+    }
+
 }

@@ -5,6 +5,9 @@ import cn.qwx.dao.UserDaoFactory;
 import cn.qwx.dao.impl.UserDaoImpl;
 import cn.qwx.entity.User;
 import cn.qwx.service.UserService;
+import cn.qwx.util.MyBatisUtil;
+import org.apache.ibatis.session.SqlSession;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -17,6 +20,7 @@ import javax.annotation.Resource;
 @Service("userService")
 public class UserServiceImpl implements UserService {
 
+    private static Logger logger=Logger.getLogger(UserServiceImpl.class);
     //声明接口类型对引用和具体实现类解耦合
     @Autowired
     @Qualifier("userDao")
@@ -75,6 +79,35 @@ public class UserServiceImpl implements UserService {
         System.out.println("注入空字符串：[" + user.getEmptyValue() + "]");
         System.out.println("注入null值：" + user.getNullValue());
         return userDao.save(user);
+    }
+
+    /**
+     * 用户类，实现对User功能的业务管理
+     */
+    public boolean addNewsUser(User user){
+        logger.info("添加用户"+user.getUserName());
+        SqlSession sqlSession=null;
+        boolean flag=false;
+        try {
+           sqlSession=MyBatisUtil.createSqlSession();
+           if(1>0){
+                 flag=true;
+                 sqlSession.commit();
+                 logger.info("成功添加用户"+user.getUserName());
+           }
+        }catch (Exception e){
+            logger.info("成功添加用户"+user.getUserName()+"失败，"+e);
+            sqlSession.rollback();
+        }finally {
+             MyBatisUtil.closeSession(sqlSession);
+        }
+        return  false;
+    }
+
+    public int delete(int id) {
+        System.out.println("删除编号为"+id+"的用户");
+        //int r = 1/0;
+        return userDao.delete(id);
     }
 
 }

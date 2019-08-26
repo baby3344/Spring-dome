@@ -32,10 +32,9 @@ public class TextPaper implements Paper {
         ++posX;
         //判断是否换行
         if(posX==lineParPage){
-            content+="==第"+posP+"页==";
-            content+=Paper.newline+Paper.newline;
+            content+=Paper.newline;
             posX=0;
-            ++posP;
+            ++posY;
         }
         //判断是都翻页
         if(posY==lineParPage){

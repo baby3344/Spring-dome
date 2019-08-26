@@ -20,6 +20,9 @@ public class UserTest {
         UserService service = (UserService) context.getBean("userService");
         int result = service.save(user);
         logger.info("结果是："+result);
+
+        result = service.delete(1);
+        logger.info("delete结果是："+result);
     }
 
     @Test

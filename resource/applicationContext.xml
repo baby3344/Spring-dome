@@ -2,11 +2,16 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:aop="http://www.springframework.org/schema/aop"
        xmlns:context="http://www.springframework.org/schema/context"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
 	   http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
        http://www.springframework.org/schema/context
-       http://www.springframework.org/schema/context/spring-context-3.2.xsd">
+       http://www.springframework.org/schema/context/spring-context-3.2.xsd
+       http://www.springframework.org/schema/aop
+       http://www.springframework.org/schema/aop/spring-aop-3.2.xsd"
+
+>
     <!--扫描包中注解标注的类-->
     <context:component-scan base-package="cn.qwx.dao,cn.qwx.service"></context:component-scan>
 
@@ -23,12 +28,12 @@
     </bean>
 
     <bean id="user" class="cn.qwx.entity.User">
-        <property name="id" value="1"></property>
+        <property name="id" value="12"></property>
         <property name="userName">
             <!--<value><![CDATA[张&三]]></value>-->
             <value>张&amp;三</value>
         </property>
-        <property name="userPassword" value="111111"></property>
+        <property name="userPassword" value="123456"></property>
 
         <!--  注入List类型-->
         <property name="list">
@@ -148,7 +153,7 @@
             <property name="charPerLine" value="6"/>
             <property name="lineParPage" value="5"/>
         </bean>
-      <!-- 组装打印机使用b4纸张打印-->
+      <!-- 组装打印机使用b5纸张打印-->
         <bean id="printer" class="cn.qwx.entity.Printer">
             <property name="ink" ref="colorInk"/>
             <property name="paper" ref="b5Paper"/>
@@ -159,4 +164,26 @@
         <property name="ink" ref="greyInk"/>
         <property name="paper" ref="a4Paper"/>
         </bean>
+
+    <!--配置增强类-->
+    <bean id="theLogger" class="cn.qwx.aop.TheLogger"></bean>
+
+    <!--配置aop-->
+    <aop:config>
+    <!--定义切点-->
+    <aop:pointcut id="myPointcut" expression="execution(public int save(cn.qwx.entity.User) )"></aop:pointcut>
+    <!--<aop:pointcut id="myPointcut" expression="execution(* cn.qwx.service.*.*(..))"></aop:pointcut>-->
+    <aop:aspect ref="theLogger">
+    <!--将myBefore()方法定义为前置增强并引用myPointcut切入点-->
+    <aop:before method="myBefore" pointcut-ref="myPointcut"></aop:before>
+    <!--将myAfterReturning()方法定义为后置增强并引用myPointcut切入点，通过returning属性指定名为result的参数注入返回值-->
+    <aop:after-returning method="myAfterReturning" pointcut-ref="myPointcut" returning="result"></aop:after-returning>
+    <!--定义异常抛出增强-->
+   <aop:after-throwing method="myError" pointcut-ref="myPointcut" throwing="e"/>
+    <!--定义最终增强-->
+   <aop:after method="myAfter" pointcut-ref="myPointcut"/>
+    <!--定义环绕增强-->
+   <aop:around method="aroundLogger" pointcut-ref="myPointcut"></aop:around>
+    </aop:aspect>
+   </aop:config>
 </beans>
