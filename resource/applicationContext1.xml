@@ -2,11 +2,19 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:aop="http://www.springframework.org/schema/aop"
        xmlns:context="http://www.springframework.org/schema/context"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
 	   http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
        http://www.springframework.org/schema/context
-       http://www.springframework.org/schema/context/spring-context-3.2.xsd">
+       http://www.springframework.org/schema/context/spring-context-3.2.xsd
+       http://www.springframework.org/schema/aop
+       http://www.springframework.org/schema/aop/spring-aop-3.2.xsd">
+
+    <context:component-scan base-package="cn.qwx"></context:component-scan>
+
+    <bean id="judge" class="cn.qwx.aop.UpdateRing"/>
+    <aop:aspectj-autoproxy/>
 
     <!--定义bean，该Bean的id是zhangGa（张嘎），class指定该bean示例的实现类-->
     <bean id="zhangGa" class="cn.qwx.entity.Greeting" p:person="张嘎" p:words="三天不打鬼子，手都痒痒！">
@@ -74,7 +82,18 @@
     <bean id="blueDevilRing1" class="cn.youxi.Equip" p:name="蓝魔指环"
           p:type="指环" p:speedPlus="8" p:attackPlus="12" p:defencePlus="2"/>
 
+
     <bean id="zhangsan1" class="cn.youxi.Player" p:armet-ref="aresHelmet1"
           p:loricae-ref="chainArmor1" p:boot-ref="persiaBoot1" p:ring-ref="blueDevilRing1"/>
 
+    <!--使用AOP实现指环升级功能-->
+   <!--<bean id="UpdateRing" class="cn.qwx.aop.UpdateRing"/>
+    <aop:config>
+        <aop:pointcut id="pointcut"
+                      expression="execution(public void UpdateEquip(..))"/>
+        <aop:aspect ref="UpdateRing">
+            <aop:before method="before"
+                        pointcut-ref="pointcut"></aop:before>
+        </aop:aspect>
+    </aop:config>-->
 </beans>

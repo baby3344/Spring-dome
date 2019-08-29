@@ -9,6 +9,15 @@ public class Equip {
     private Long speedPlus;  //速度增效
     private Long attackPlus;  //攻击增效
     private Long defencePlus;  //防御增效
+    private String oldName;
+
+    public String getOldName() {
+        return oldName;
+    }
+
+    public void setOldName(String oldName) {
+        this.oldName = oldName;
+    }
 
     public String getName() {
         return name;
