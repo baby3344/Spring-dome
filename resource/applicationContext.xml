@@ -4,6 +4,7 @@
        xmlns:p="http://www.springframework.org/schema/p"
        xmlns:aop="http://www.springframework.org/schema/aop"
        xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:cop="http://www.springframework.org/schema/aop"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
 	   http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
        http://www.springframework.org/schema/context
@@ -13,7 +14,10 @@
 
 >
     <!--扫描包中注解标注的类-->
-    <context:component-scan base-package="cn.qwx.dao,cn.qwx.service"></context:component-scan>
+    <context:component-scan base-package="cn.qwx"></context:component-scan>
+
+
+    <cop:aspectj-autoproxy/>
 
     <!--通过bean元素声明需要Spring创建的实例。该实例的类型通过class属性指定，并通过id属性为该实例属性制定一个名称，以便于访问-->
     <bean id="helloSpring" class="cn.qwx.entity.HelloSpring">
@@ -111,16 +115,16 @@
 
     <!--引用其他Bean组件-->
     <!--定义userDao对象，并指定id为userDao-->
-    <bean id="userDao" class="cn.qwx.dao.impl.UserDaoImpl"></bean>
+   <!-- <bean id="userDao" class="cn.qwx.dao.impl.UserDaoImpl"></bean>-->
 
     <!--定义userService对象，并指定id为定义userService-->
-    <bean id="userService" class="cn.qwx.service.impl.UserServiceImpl">
-         <!--为userService的属性赋值，需要注意的是，这里调用setDao()方法-->
+   <!-- <bean id="userService" class="cn.qwx.service.impl.UserServiceImpl">
+         &lt;!&ndash;为userService的属性赋值，需要注意的是，这里调用setDao()方法&ndash;&gt;
         <property name="dao">
-            <!--引用id为userDao的对象为定义userService的到赋值-->
+            &lt;!&ndash;引用id为userDao的对象为定义userService的到赋值&ndash;&gt;
             <ref bean="userDao"/>
         </property>
-    </bean>
+    </bean>-->
 
     <!--定义userService对象，并指定id为定义userService-->
     <bean id="userService1" class="cn.qwx.service.impl.UserServiceImpl">
@@ -166,24 +170,24 @@
         </bean>
 
     <!--配置增强类-->
-    <bean id="theLogger" class="cn.qwx.aop.TheLogger"></bean>
+    <!--<bean id="theLogger" class="cn.qwx.aop.TheLogger"></bean>-->
 
     <!--配置aop-->
-    <aop:config>
+   <!--<aop:config>-->
     <!--定义切点-->
-    <aop:pointcut id="myPointcut" expression="execution(public int save(cn.qwx.entity.User) )"></aop:pointcut>
-    <!--<aop:pointcut id="myPointcut" expression="execution(* cn.qwx.service.*.*(..))"></aop:pointcut>-->
-    <aop:aspect ref="theLogger">
+    <!--<aop:pointcut id="myPointcut" expression="execution(public int save(cn.qwx.entity.User) )"></aop:pointcut>-->
+  <!-- <aop:pointcut id="myPointcut" expression="execution(* cn.qwx.service.*.*(..))"></aop:pointcut>
+   <aop:aspect ref="theLogger">-->
     <!--将myBefore()方法定义为前置增强并引用myPointcut切入点-->
-    <aop:before method="myBefore" pointcut-ref="myPointcut"></aop:before>
+   <!-- <aop:before method="myBefore" pointcut-ref="myPointcut"></aop:before>-->
     <!--将myAfterReturning()方法定义为后置增强并引用myPointcut切入点，通过returning属性指定名为result的参数注入返回值-->
-    <aop:after-returning method="myAfterReturning" pointcut-ref="myPointcut" returning="result"></aop:after-returning>
+    <!--<aop:after-returning method="myAfterReturning" pointcut-ref="myPointcut" returning="result"></aop:after-returning>-->
     <!--定义异常抛出增强-->
-   <aop:after-throwing method="myError" pointcut-ref="myPointcut" throwing="e"/>
+   <!--<aop:after-throwing method="myError" pointcut-ref="myPointcut" throwing="e"/>-->
     <!--定义最终增强-->
-   <aop:after method="myAfter" pointcut-ref="myPointcut"/>
+  <!-- <aop:after method="myAfter" pointcut-ref="myPointcut"/>-->
     <!--定义环绕增强-->
-   <aop:around method="aroundLogger" pointcut-ref="myPointcut"></aop:around>
+  <!-- <aop:around method="aroundLogger" pointcut-ref="myPointcut"></aop:around>
     </aop:aspect>
-   </aop:config>
+   </aop:config>-->
 </beans>

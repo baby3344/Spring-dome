@@ -18,10 +18,10 @@ public class UserTest {
         ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
         User user = (User) context.getBean("user");
         UserService service = (UserService) context.getBean("userService");
-        int result = service.save(user);
-        logger.info("结果是："+result);
+        /*int result = service.save(user);
+        logger.info("结果是："+result);*/
 
-        result = service.delete(1);
+        int result = service.delete(1);
         logger.info("delete结果是："+result);
     }
 
@@ -29,8 +29,9 @@ public class UserTest {
     public void testAppConfig(){
         ApplicationContext ctx = new AnnotationConfigApplicationContext(AppConfig.class);
 
-        UserService userService = ctx.getBean(UserServiceImpl.class);
-        User user = ctx.getBean(User.class);
+        UserService userService =(UserService) ctx.getBean("userService");
+
+        User user =(User) ctx.getBean("user");
 
         int result = userService.save(user);
 

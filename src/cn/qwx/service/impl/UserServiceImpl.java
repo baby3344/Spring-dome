@@ -68,41 +68,19 @@ public class UserServiceImpl implements UserService {
         System.out.println(user.getId());
         System.out.println(user.getUserName());
         System.out.println(user.getUserPassword());
-        System.out.println("特殊字符1：" + user.getSpecialCharacter1());
+       /* System.out.println("特殊字符1：" + user.getSpecialCharacter1());
         System.out.println("特殊字符2：" + user.getSpecialCharacter2());
-        //System.out.println("内部Bean：" + user.getInnerBean().getUserName());
+        System.out.println("内部Bean：" + user.getInnerBean().getUserName());
         System.out.println("List属性：" + user.getList());
         System.out.println("数组属性[0]：" + user.getArray()[0]);
         System.out.println("Set属性：" + user.getSet());
         System.out.println("Map属性：" + user.getMap());
         System.out.println("Properties属性：" + user.getProps());
         System.out.println("注入空字符串：[" + user.getEmptyValue() + "]");
-        System.out.println("注入null值：" + user.getNullValue());
+        System.out.println("注入null值：" + user.getNullValue());*/
         return userDao.save(user);
     }
 
-    /**
-     * 用户类，实现对User功能的业务管理
-     */
-    public boolean addNewsUser(User user){
-        logger.info("添加用户"+user.getUserName());
-        SqlSession sqlSession=null;
-        boolean flag=false;
-        try {
-           sqlSession=MyBatisUtil.createSqlSession();
-           if(1>0){
-                 flag=true;
-                 sqlSession.commit();
-                 logger.info("成功添加用户"+user.getUserName());
-           }
-        }catch (Exception e){
-            logger.info("成功添加用户"+user.getUserName()+"失败，"+e);
-            sqlSession.rollback();
-        }finally {
-             MyBatisUtil.closeSession(sqlSession);
-        }
-        return  false;
-    }
 
     public int delete(int id) {
         System.out.println("删除编号为"+id+"的用户");

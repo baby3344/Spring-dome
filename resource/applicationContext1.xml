@@ -25,6 +25,45 @@
     </bean>
 
 
+   <bean id="zhanShenArmet" class="cn.youxi.Equip">
+       <property name="name" value="战神头盔"/>
+       <property name="type" value="头盔"/>
+       <property name="speedPlus" value="2"/>
+       <property name="attackPlus" value="4"/>
+       <property name="defencePlus" value="6"/>
+   </bean>
+
+    <bean id="lianhuansuozijia" class="cn.youxi.Equip">
+        <property name="name" value="连环锁子甲"/>
+        <property name="type" value="铠甲"/>
+        <property name="speedPlus" value="6"/>
+        <property name="attackPlus" value="4"/>
+        <property name="defencePlus" value="15"/>
+    </bean>
+
+    <bean id="bosizhuifengxue" class="cn.youxi.Equip">
+        <property name="name" value="波斯追风靴"/>
+        <property name="type" value="靴子"/>
+        <property name="speedPlus" value="8"/>
+        <property name="attackPlus" value="2"/>
+        <property name="defencePlus" value="3"/>
+    </bean>
+
+    <bean id="lanmojiezhi" class="cn.youxi.Equip">
+        <property name="name" value="蓝魔指环"/>
+        <property name="type" value="指环"/>
+        <property name="speedPlus" value="8"/>
+        <property name="attackPlus" value="12"/>
+        <property name="defencePlus" value="2"/>
+    </bean>
+
+    <bean id="zhangsan" class="cn.youxi.Player">
+        <property name="armet" ref="zhanShenArmet"/>
+        <property name="boot" ref="lianhuansuozijia"/>
+        <property name="loricae" ref="bosizhuifengxue"/>
+        <property name="ring" ref="lanmojiezhi"/>
+    </bean>
+
 
 
 </beans>

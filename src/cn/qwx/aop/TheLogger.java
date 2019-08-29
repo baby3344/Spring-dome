@@ -18,7 +18,7 @@ public class TheLogger {
     @Pointcut("execution(* cn.qwx.service.*.*(..))")
     public void pointcut(){}
 
-    //前置增强
+    /*//前置增强
     //@Before注解将myBefore()方法定义为前置增强
     @Before("pointcut()")
     public void myBefore(JoinPoint jp){
@@ -39,9 +39,9 @@ public class TheLogger {
     @After("pointcut()")
     public void myAfter(JoinPoint jp){
         log.error(jp.getTarget()+"中"+jp.getSignature().getName()+"方法执行结束");
-    }
+    }*/
 
-    //@Around("pointcut()")
+    @Around("pointcut()")
     public Object aroundLogger(ProceedingJoinPoint jp) throws Throwable{
         log.info("调用"+jp.getTarget()+"的"+jp.getSignature().getName()+"方法。方法的入参为："+Arrays.toString(jp.getArgs()));
 
